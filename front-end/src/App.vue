@@ -16,6 +16,9 @@
   <div class="footer">
     <router-link to="/admin">Admin</router-link>
   </div>
+<footer>
+  <p><a href="https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales">Eliza's GitHub Repository</a></p>
+</footer>
 </div>
 </template>
 

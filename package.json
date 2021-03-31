@@ -1,0 +1,19 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "In this assignment, you will build an entire web application, using Vue for the\r front end and Node, Express, and Mongo on the back end. As part of this, we will\r show you how to upload photos to a server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales/issues"
+  },
+  "homepage": "https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales#readme"
+}
