@@ -10,71 +10,52 @@ app.use(bodyParser.urlencoded({
 const mongoose = require('mongoose');
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/museum', {
+mongoose.connect('mongodb://localhost:27017/journal', {
   useNewUrlParser: true
 });
 
-// Configure multer so that it will upload to '../front-end/public/images'
-const multer = require('multer')
-const upload = multer({
-  dest: '../front-end/public/images/',
-  limits: {
-    fileSize: 10000000
-  }
-});
-
-// Create a scheme for items in the museum: a title and a path to an image.
-const itemSchema = new mongoose.Schema({
-  title: String,
+// Create a scheme for entries in the journal: date, vocabulary, description, and entry.
+const entrySchema = new mongoose.Schema({
+  date: String,
+  vocab: String,
   desc: String,
-  path: String,
+  entry: String,
 });
 
-// Create a model for items in the museum.
-const Item = mongoose.model('Item', itemSchema);
+// Create a model for entries in a journal.
+const Entry = mongoose.model('Entry', entrySchema);
 
-// Upload a photo. Uses the multer middleware for the upload and then returns
-// the path where the photo is stored in the file system.
-app.post('/api/photos', upload.single('photo'), async (req, res) => {
-  // Just a safety check
-  if (!req.file) {
-    return res.sendStatus(400);
-  }
-  res.send({
-    path: "/images/" + req.file.filename
-  });
-});
-
-// Create a new item in the museum: takes a title and a path to an image.
-app.post('/api/items', async (req, res) => {
-  const item = new Item({
-    title: req.body.title,
+// Create a new entry in the journal that takes a date, vocabulary, description, and entry.
+app.post('/api/entries', async (req, res) => {
+  const entry = new Entry({
+    date: req.body.date,
+    vocab: req.body.vocab,
     desc: req.body.desc,
-    path: req.body.path,
+    entry: req.body.entry,
   });
   try {
-    await item.save();
-    res.send(item);
+    await entry.save();
+    res.send(entry);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 });
 
-// Get a list of all of the items in the museum.
-app.get('/api/items', async (req, res) => {
+// Get a list of all of the entries in the journal.
+app.get('/api/entries', async (req, res) => {
   try {
-    let items = await Item.find();
-    res.send(items);
+    let entries = await Entry.find();
+    res.send(entries);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
 });
 
-app.delete('/api/items/:id', async (req, res) => {
+app.delete('/api/entries/:id', async (req, res) => {
   try {
-    await Item.deleteOne({
+    await Entry.deleteOne({
       _id: req.params.id
     });
     res.sendStatus(200);
@@ -84,14 +65,14 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
-app.put('/api/items/:id', async (req, res) => {
+app.put('/api/entries/:id', async (req, res) => {
   try {
-    let item = await Item.findOne({
+    let entry = await Entry.findOne({
       _id: req.params.id
     });
-    item.title = req.body.title;
-    item.desc = req.body.desc;
-    item.save();
+    entry.desc = req.body.desc;
+    entry.entry = req.body.entry;
+    entry.save();
     res.sendStatus(200);
   } catch (error) {
     console.log(error);

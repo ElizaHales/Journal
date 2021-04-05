@@ -1,12 +1,10 @@
 <template>
 <div class="home">
-  <section class="image-gallery">
-    <div class="image" v-for="item in items" :key="item.id">
-      <h2>{{item.title}}</h2>
-      <p>{{item.desc}}</p>
-      <img :src="item.path" />
-    </div>
-  </section>
+  <div v-for="entry in entries" :key="entry.id">
+    <h1>{{entry.date}}</h1>
+    <p style="font-size: 18px;">{{entry.entry}}</p>
+    <p><br><br><br></p>
+  </div>
 </div>
 </template>
 
@@ -17,17 +15,19 @@ export default {
   name: 'Home',
   data() {
     return {
-     items: [],
+      entries: [],
     }
   },
   created() {
-    this.getItems();
+    this.getEntries();
   },
   methods: {
-    async getItems() {
+    async getEntries() {
       try {
-        let response = await axios.get("/api/items");
-        this.items = response.data;
+        let response = await axios.get("/api/entries");
+        let entries = response.data;
+        entries = entries.filter(entry => entry.entry.includes(entry.vocab));
+        this.entries = entries;
         return true;
       } catch (error) {
         console.log(error);
@@ -38,8 +38,8 @@ export default {
 </script>
 
 <style scoped>
-.image h2 {
-  font-style: italic;
+.image h1 {
+  font-style: bold;
 }
 
 /* Masonry */
@@ -47,20 +47,6 @@ export default {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-.image-gallery {
-  column-gap: 1.5em;
-}
-
-.image {
-  margin: 0 0 1.5em;
-  display: inline-block;
-  width: 100%;
-}
-
-.image img {
-  width: 100%;
 }
 
 /* Masonry on large screens */

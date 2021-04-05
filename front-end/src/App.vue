@@ -1,24 +1,25 @@
 <template>
 <div id="app">
   <div class="header">
+    <div class="menu">
+      <h2><router-link to="/new">New Entry</router-link></h2>
+    </div>
     <router-link to="/">
-      <div class="logo">
-        <img src="/ordinary.png">
+      <div class="title">
+        <h1>Journal</h1>
+        <img src="/journal.png">
       </div>
     </router-link>
-    <div class="title">
-      <h1>Museum of Ordinary Objects</h1>
+    <div class="menu">
+      <h2><router-link to="/edit">Edit Entry</router-link></h2>
     </div>
   </div>
   <div class="content">
     <router-view />
   </div>
   <div class="footer">
-    <router-link to="/admin">Admin</router-link>
+    <a href="https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales">Eliza's GitHub Repository</a>
   </div>
-<footer>
-  <p><a href="https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales">Eliza's GitHub Repository</a></p>
-</footer>
 </div>
 </template>
 
@@ -38,9 +39,11 @@ body {
 /* Header */
 .header {
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 100px 0px 100px;
-  background-color: #5BDEFF;
-  color: #1C454F;
+  background-color: #FFFACD;
+  color: #000000;
 }
 
 .title {
@@ -48,7 +51,18 @@ body {
 }
 
 .title h1 {
+  color: #000;
   font-size: 30px;
+  text-align: center;
+}
+
+.menu {
+  margin-top: 6px;
+}
+
+.menu h2 {
+  color: #000;
+  font-size: 18px;
 }
 
 .content {
@@ -61,7 +75,7 @@ body {
   height: 50px;
   padding: 20px 100px 0px 100px;
   background: #e3e3e3;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .footer a {
