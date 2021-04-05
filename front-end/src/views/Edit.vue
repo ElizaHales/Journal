@@ -18,6 +18,7 @@
     <textarea rows="5" cols="80" v-model="findEntry.desc" disabled></textarea>
     <p></p>
     <textarea rows="15" cols="80" v-model="findEntry.entry"></textarea>
+    <p></p>
     <div v-if="findEntry">
       <button style="margin-right:10px;" @click="editEntry(findEntry)">Apply Edits</button>
       <button @click="deleteEntry(findEntry)">Delete</button>

@@ -18,7 +18,7 @@
     <router-view />
   </div>
   <div class="footer">
-    <a href="https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElizaHales">Eliza's GitHub Repository</a>
+    <a href="https://github.com/ElizaHales/Journal">Eliza's Public GitHub Repository</a>
   </div>
 </div>
 </template>
