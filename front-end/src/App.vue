@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class="header">
-    <div class="menu">
+    <div v-if="user" class="menu">
       <h2><router-link to="/new">New Entry</router-link></h2>
     </div>
     <router-link to="/">
@@ -10,10 +10,13 @@
         <img src="/journal.png">
       </div>
     </router-link>
-    <div class="menu">
+    <div v-if="user" class="menu">
       <h2><router-link to="/edit">Edit Entry</router-link></h2>
     </div>
   </div>
+    <div v-if="user" class="logout">
+      <button @click="logout">Logout</button>
+    </div>
   <div class="content">
     <router-view />
   </div>
@@ -22,6 +25,28 @@
   </div>
 </div>
 </template>
+
+<script>
+import axios from 'axios';
+export default {
+  name: "App",
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    },
+  },
+  methods: {
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
+  }
+};
+</script>
 
 <style>
 html {
@@ -34,6 +59,12 @@ body {
   background: #fff;
   padding: 0px;
   margin: 0px;
+}
+
+.logout {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Header */

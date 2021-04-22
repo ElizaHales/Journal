@@ -1,18 +1,23 @@
 <template>
-<div class="home">
+<div v-if="user" class="home">
   <div v-for="entry in entries" :key="entry.id">
     <h1>{{entry.date}}</h1>
     <p style="font-size: 18px;">{{entry.entry}}</p>
     <p><br><br><br></p>
   </div>
 </div>
+<Login v-else />
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from 'axios';
+import Login from "@/components/Login.vue";
 export default {
   name: 'Home',
+  components: {
+    Login,
+  },
   data() {
     return {
       entries: [],
@@ -20,6 +25,11 @@ export default {
   },
   created() {
     this.getEntries();
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    },
   },
   methods: {
     async getEntries() {
